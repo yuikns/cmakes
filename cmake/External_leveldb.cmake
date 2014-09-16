@@ -1,4 +1,4 @@
-# SET(leveldb_build "${CMAKE_CURRENT_BINARY_DIR}/leveldb")
+SET(leveldb_build "${CMAKE_CURRENT_BINARY_DIR}/leveldb")
 
 # FIND_LIBRARY( LEVELDB_LIBRARY_INFO  NAMES  leveldb PATHS "${PROJECT_BINARY_DIR}/lib" )
 
@@ -8,6 +8,7 @@ EXTERNALPROJECT_ADD(
  		PREFIX ${CMAKE_CURRENT_BINARY_DIR}
  		UPDATE_COMMAND ""
  		CONFIGURE_COMMAND ""
+ 		SOURCE_DIR ${leveldb_build}
  		# BINARY_DIR ${leveldb_build}
  		BUILD_COMMAND make
  		BUILD_IN_SOURCE 1

@@ -7,24 +7,8 @@
 # SET(SRC_LIST argcvse.cc)
 ADD_EXECUTABLE(cmake_sample main.cc)
 
-#  executable dependencies
-# ADD_DEPENDENCIES(cmake_sample relfiles)
-# ADD_DEPENDENCIES(cmake_sample iniparser_static)
-
-# set_property(TARGET leveldb_proj PROPERTY EXCLUDE_FROM_ALL TRUE)
-# set_property(TARGET crfpp_proj PROPERTY EXCLUDE_FROM_ALL TRUE)
 
 ADD_DEPENDENCIES(cmake_sample iniparser_static crfpp_proj leveldb_proj)
-
-# IF(LEVELDB_EX_PROJ)
-# 	MESSAGE(STATUS "extend project leveldb to be finished ")
-# 	ADD_DEPENDENCIES(cmake_sample LEVELDB_EX_PROJ)
-# ENDIF()
-
-# IF(CRFPP_EX_PROJ)
-# 	MESSAGE(STATUS "extend project crfpp to be finished ")
-# 	ADD_DEPENDENCIES(cmake_sample CRFPP_EX_PROJ)
-# ENDIF()
 
 
 #  executable target links

@@ -1,4 +1,4 @@
-# SET(crfpp_build "${CMAKE_CURRENT_BINARY_DIR}/crfpp")
+SET(crfpp_build "${CMAKE_CURRENT_BINARY_DIR}/crfpp")
 
 EXTERNALPROJECT_ADD(
  		crfpp_proj
@@ -6,6 +6,7 @@ EXTERNALPROJECT_ADD(
  		PREFIX ${CMAKE_CURRENT_BINARY_DIR}
  		UPDATE_COMMAND ""
  		CONFIGURE_COMMAND ./configure
+ 		SOURCE_DIR ${crfpp_build}
  		# BINARY_DIR ${crfpp_build}
  		BUILD_COMMAND make -j8
  		BUILD_IN_SOURCE 1
