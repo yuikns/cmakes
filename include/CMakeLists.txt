@@ -1,4 +1,4 @@
-SET(SHOW_CMAKE_CONFIGURE_INFO TRUE)
+SET(SHOW_CMAKE_CONFIGURE_INFO FALSE)
 
 IF(SHOW_CMAKE_CONFIGURE_INFO)
 	# ------------------------- Begin Generic CMake Variable Logging ------------------
