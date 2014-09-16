@@ -11,8 +11,8 @@ ADD_EXECUTABLE(cmake_sample main.cc)
 # ADD_DEPENDENCIES(cmake_sample relfiles)
 # ADD_DEPENDENCIES(cmake_sample iniparser_static)
 
-set_property(TARGET leveldb_proj PROPERTY EXCLUDE_FROM_ALL TRUE)
-set_property(TARGET crfpp_proj PROPERTY EXCLUDE_FROM_ALL TRUE)
+# set_property(TARGET leveldb_proj PROPERTY EXCLUDE_FROM_ALL TRUE)
+# set_property(TARGET crfpp_proj PROPERTY EXCLUDE_FROM_ALL TRUE)
 
 ADD_DEPENDENCIES(cmake_sample iniparser_static crfpp_proj leveldb_proj)
 
