@@ -1,6 +1,6 @@
 PROJECT(W2VCEM)
 # REQUIRE
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.8)
 
 # some useful variables  http://www.cmake.org/Wiki/CMake_Useful_Variables
 
