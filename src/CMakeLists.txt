@@ -85,18 +85,22 @@ ADD_EXECUTABLE(cmake_sample main.cc)
 
 #  executable dependencies
 # ADD_DEPENDENCIES(cmake_sample relfiles)
-ADD_DEPENDENCIES(cmake_sample iniparser_static)
-MESSAGE(STATUS "LEVELDB_EX_PROJ" ${LEVELDB_EX_PROJ})
+# ADD_DEPENDENCIES(cmake_sample iniparser_static)
 
-IF(LEVELDB_EX_PROJ)
-	MESSAGE(STATUS "extend project leveldb to be finished ")
-	ADD_DEPENDENCIES(cmake_sample LEVELDB_EX_PROJ)
-ENDIF()
+set_property(TARGET CRFPP_EX_PROJ PROPERTY EXCLUDE_FROM_ALL TRUE)
+set_property(TARGET LEVELDB_EX_PROJ PROPERTY EXCLUDE_FROM_ALL TRUE)
 
-IF(CRFPP_EX_PROJ)
-	MESSAGE(STATUS "extend project crfpp to be finished ")
-	ADD_DEPENDENCIES(cmake_sample CRFPP_EX_PROJ)
-ENDIF()
+ADD_DEPENDENCIES(cmake_sample iniparser_static CRFPP_EX_PROJ LEVELDB_EX_PROJ)
+
+# IF(LEVELDB_EX_PROJ)
+# 	MESSAGE(STATUS "extend project leveldb to be finished ")
+# 	ADD_DEPENDENCIES(cmake_sample LEVELDB_EX_PROJ)
+# ENDIF()
+
+# IF(CRFPP_EX_PROJ)
+# 	MESSAGE(STATUS "extend project crfpp to be finished ")
+# 	ADD_DEPENDENCIES(cmake_sample CRFPP_EX_PROJ)
+# ENDIF()
 
 
 #  executable target links
