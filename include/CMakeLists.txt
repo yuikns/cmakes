@@ -150,7 +150,7 @@ IF(SHOW_CMAKE_CONFIGURE_INFO)
 	MESSAGE( STATUS "CMAKE_RANLIB: " ${CMAKE_RANLIB} )
 
 	#
-	#MESSAGE( STATUS ": " ${} )
+	MESSAGE( STATUS ": " ${} )
 
 	# ------------------------- End of Generic CMake Variable Logging ------------------
 

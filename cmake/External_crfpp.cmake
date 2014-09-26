@@ -1,17 +1,17 @@
 SET(crfpp_build "${CMAKE_CURRENT_BINARY_DIR}/crfpp")
 
 EXTERNALPROJECT_ADD(
- 		crfpp_proj
- 		GIT_REPOSITORY git@github.com:yujing5b5d/crfpp.git
- 		PREFIX ${CMAKE_CURRENT_BINARY_DIR}
- 		UPDATE_COMMAND ""
- 		CONFIGURE_COMMAND ./configure
- 		SOURCE_DIR ${crfpp_build}
- 		# BINARY_DIR ${crfpp_build}
- 		BUILD_COMMAND make -j8
- 		BUILD_IN_SOURCE 1
- 		INSTALL_COMMAND cp .libs/libcrfpp.a ${PROJECT_BINARY_DIR}/lib && cp crfpp.h ${PROJECT_BINARY_DIR}/include 
- 	)
+	crfpp_proj
+	GIT_REPOSITORY git@github.com:yujing5b5d/crfpp.git
+	PREFIX ${CMAKE_CURRENT_BINARY_DIR}
+	UPDATE_COMMAND ""
+	CONFIGURE_COMMAND ./configure
+	SOURCE_DIR ${crfpp_build}
+	# BINARY_DIR ${crfpp_build}
+	BUILD_COMMAND make -j8
+	BUILD_IN_SOURCE 1
+	INSTALL_COMMAND cp .libs/libcrfpp.a ${PROJECT_BINARY_DIR}/lib && cp crfpp.h ${PROJECT_BINARY_DIR}/include 
+)
 
 # http://www.cmake.org/cmake/help/v3.0/command/find_library.html
 # FIND_LIBRARY ( LEVELDB_LIBRARY_INFO NAMES "libleveldb" PATH_SUFFIXES "lib" "a" "so" "dylib")
