@@ -83,7 +83,10 @@ SET(RESOURCE_DIR ${PROJECT_SOURCE_DIR}/res)
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/config.h.in ${PROJECT_BINARY_DIR}/include/config.h )
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/config.ini ${PROJECT_BINARY_DIR}/config.ini )
 
-EXEC_PROGRAM("cp -r ${PROJECT_SOURCE_DIR}/res/dict.db ${PROJECT_BINARY_DIR}")
+#EXEC_PROGRAM("cp -r ${PROJECT_SOURCE_DIR}/res/dict.db ${PROJECT_BINARY_DIR}")
+# FILE  COPY : http://www.cmake.org/cmake/help/v2.8.10/cmake.html#command%3afile
+# OLD VERSION , FILE COPY CAN SEE: http://stackoverflow.com/questions/697560/how-to-copy-directory-from-source-tree-to-binary-tree
+FILE(COPY ${PROJECT_SOURCE_DIR}/res/dict.db DESTINATION ${PROJECT_BINARY_DIR})
 
 #ADD_TEST(evolution ${EXECUTABLE_OUTPUT_PATH}/percimpl evo )
 #ENABLE_TESTING()
