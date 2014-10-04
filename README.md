@@ -1,4 +1,5 @@
-cmake sample
+用CMake构建自己的工程
 =====================================
-this is just a cmake sample 
+
+<strong>test</strong>
 
