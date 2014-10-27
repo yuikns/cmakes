@@ -25,6 +25,7 @@ ENDIF(OPTIONS_USE_EXTERNAL_LEVELDB)
 # TARGET_LINK_LIBRARIES(abcs relfiles)
 TARGET_LINK_LIBRARIES(DictReader iniparser_static)
 TARGET_LINK_LIBRARIES(DictReader leveldb)
+TARGET_LINK_LIBRARIES(DictReader pthread) # for leveldb
 #TARGET_LINK_LIBRARIES(DictReader crfpp)
 TARGET_LINK_LIBRARIES(DictReader argcvse_util_static)
 
