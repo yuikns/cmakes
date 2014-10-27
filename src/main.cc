@@ -4,6 +4,7 @@
 #include "config.h"
 #include "argcvse/util.h"
 #include <iostream>
+#include <assert.h>
 // class Dict
 // {
 // public :
@@ -43,6 +44,7 @@ int main(int argc, char *argv[])
 	
 	printf("loaded \n");
 	char buff[100];
+	
 	printf ("input a chinese phrase , it will return a fequency .. \n");
 	while(scanf("%s",buff)  >= 1 )
 	{
