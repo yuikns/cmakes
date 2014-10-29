@@ -36,5 +36,5 @@ CMake is a open source project build manager especially for C/C++ .
 
 ### Related Books & Links
 
-+ Official site : http://www.cmake.org/cmake/help/v3.0/index.html
++ CMake API Document v3.0 : http://www.cmake.org/cmake/help/v3.0/index.html
 + Official Book Store : http://www.kitware.com/products/books.php , Mastering CMake helps me a lot .
