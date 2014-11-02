@@ -8,8 +8,8 @@ http://code.google.com/p/inih/
 */
 
 
-#ifndef __INI_H__
-#define __INI_H__
+#ifndef INCLUDE_INI_H_
+#define INCLUDE_INI_H_
 
 /* Make this header file easier to include in C++ code */
 #ifdef __cplusplus
@@ -70,4 +70,5 @@ int ini_parse_file(FILE* file,
 }
 #endif
 
-#endif /* __INI_H__ */
+#endif  // INCLUDE_INI_H_
+

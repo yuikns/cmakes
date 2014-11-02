@@ -1,0 +1,3 @@
+[submodule "res/webdict"]
+	path = res/webdict
+	url = git@github.com:ling0322/webdict.git
