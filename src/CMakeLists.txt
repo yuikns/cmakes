@@ -8,7 +8,7 @@
 ADD_EXECUTABLE(DictReader main.cc)
 
 
-ADD_DEPENDENCIES(DictReader iniparser_static argcv_util_static argcv_util_dict_static)
+ADD_DEPENDENCIES(DictReader inihpp_static argcv_util_static argcv_util_dict_static)
 
 #IF(OPTIONS_USE_EXTERNAL_CRFPP)
 #	ADD_DEPENDENCIES(DictReader crfpp_proj)
@@ -21,7 +21,7 @@ ADD_DEPENDENCIES(DictReader leveldb_proj)
 
 #  executable target links
 # TARGET_LINK_LIBRARIES(abcs relfiles)
-TARGET_LINK_LIBRARIES(DictReader iniparser_static)
+TARGET_LINK_LIBRARIES(DictReader inihpp_static)
 TARGET_LINK_LIBRARIES(DictReader leveldb)
 TARGET_LINK_LIBRARIES(DictReader pthread) # for leveldb
 #TARGET_LINK_LIBRARIES(DictReader crfpp)

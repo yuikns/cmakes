@@ -6,6 +6,7 @@
 #include "argcv/util.h"
 #include "argcv/util/dict.h"
 
+#include "inih/INIReader.h"
 // #include <cassert>
 
 
@@ -18,6 +19,18 @@ int main(int argc, char *argv[]) {
                 CMAKE_SYSTEM,
                 CMAKE_SYSTEM_NAME,
                 CMAKE_SYSTEM_PROCESSOR);
+
+    INIReader reader("config.ini");
+
+    if (reader.ParseError() < 0) {
+        fprintf(stderr, "Can't load 'config.ini'\n");
+        return -1;
+    }
+
+    printf("dict_dir : %s , node : %ld \n",
+        reader.Get("base", "dict_dir", "unknown?").c_str(),
+        reader.GetInteger("base", "node", -1));
+
     printf("loading dict \n");
 
     argcv::util::Dict &d = argcv::util::Dict::instance();

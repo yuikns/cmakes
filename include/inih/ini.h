@@ -1,3 +1,4 @@
+// Copyright (c) 2009, Brush Technology
 /* inih -- simple .INI file parser
 
 inih is released under the New BSD license (see LICENSE.txt). Go to the project
@@ -7,9 +8,8 @@ http://code.google.com/p/inih/
 
 */
 
-
-#ifndef INCLUDE_INI_H_
-#define INCLUDE_INI_H_
+#ifndef INCLUDE_INIH_INI_H_
+#define INCLUDE_INIH_INI_H_
 
 /* Make this header file easier to include in C++ code */
 #ifdef __cplusplus
@@ -61,6 +61,11 @@ int ini_parse_file(FILE* file,
 #define INI_USE_STACK 1
 #endif
 
+/* Stop parsing on first error (default is to keep parsing). */
+#ifndef INI_STOP_ON_FIRST_ERROR
+#define INI_STOP_ON_FIRST_ERROR 0
+#endif
+
 /* Maximum line length for any line in INI file. */
 #ifndef INI_MAX_LINE
 #define INI_MAX_LINE 200
@@ -70,5 +75,4 @@ int ini_parse_file(FILE* file,
 }
 #endif
 
-#endif  // INCLUDE_INI_H_
-
+#endif  // INCLUDE_INIH_INI_H_
