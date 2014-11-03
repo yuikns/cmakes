@@ -2,7 +2,7 @@
 #include <cstdio>
 // #include <iostream>
 // #include "crfpp.h" // crfpp
-#include "./config.h"
+#include "conf/config.h"
 #include "argcv/util.h"
 #include "argcv/util/dict.h"
 
