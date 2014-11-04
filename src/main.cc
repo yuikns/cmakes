@@ -31,6 +31,12 @@ int main(int argc, char *argv[]) {
         reader.Get("base", "dict_dir", "unknown?").c_str(),
         reader.GetInteger("base", "node", -1));
 
+    argcv::util::HashKeys &kgens = argcv::util::HashKeys::instance();
+
+    for (int i = 0 ; i < 4 ; i++) {
+        printf("%d : %llx \n", i, kgens.hash("Hello , world !", i));
+    }
+
     printf("loading dict \n");
 
     argcv::util::Dict &d = argcv::util::Dict::instance();

@@ -12,15 +12,8 @@
 namespace argcv {
 namespace util {
 
-static uint64_t crypt[0x500];
-static bool is_crypted = false;
-
-void crypt_init() {
-    if (is_crypted) {
-        return;
-    } else {
-        is_crypted = true;
-    }
+HashKeys::HashKeys() {
+    // crypt table genrate
     uint64_t seed = 0x00100001, idx_a = 0, idx_b = 0, i;
 
     for ( idx_a = 0; idx_a < 0x100; idx_a++ ) {
@@ -35,20 +28,20 @@ void crypt_init() {
     }
 }
 
-uint64_t hash(const char * k, uint64_t offset) {
+
+HashKeys::~HashKeys() {
+}
+
+uint64_t HashKeys::hash(const std::string & k, uint64_t offset) {
     uint64_t seed_a = 0x7FED7FED, seed_b = 0xEEEEEEEE;
     uint64_t ch;
-    while (*k != 0) {
-        ch = (*k++);
+    for (int i = 0 ; i < k.length() ; i++) {
+        ch = (uint64_t)k[i];
         // ch = toupper(*k++);
         seed_a = crypt[(offset << 8) + ch] ^ (seed_a + seed_b);
         seed_b = ch + seed_a + seed_b + (seed_b << 5) + 3;
     }
     return seed_a;
-}
-
-uint64_t hash(const std::string & k, uint64_t offset) {
-    return hash(k.c_str(), offset);
 }
 
 std::vector<std::string> &split(const std::string &s, const std::string &delim,
