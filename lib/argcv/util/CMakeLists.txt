@@ -16,3 +16,4 @@ TARGET_LINK_LIBRARIES(argcv_util_static m)
 
 
 ADD_SUBDIRECTORY(dict)
+ADD_SUBDIRECTORY(oid)

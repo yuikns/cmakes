@@ -24,7 +24,7 @@ std::string dict_default_db_path("dict.db");
 Dict::Dict() {
     // std::cout << "dict start" << std::endl;
     // db init
-    options.create_if_missing = true;  // 如果没有则创建
+    options.create_if_missing = true;  // create if not exists
     options.block_cache = leveldb::NewLRUCache(30 * 1048576L);  // 1000MB cache
 
     leveldb::Status status =

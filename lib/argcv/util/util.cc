@@ -12,7 +12,7 @@
 namespace argcv {
 namespace util {
 
-HashKeys::HashKeys() {
+BlzKeygen::BlzKeygen() {
     // crypt table genrate
     uint64_t seed = 0x00100001, idx_a = 0, idx_b = 0, i;
 
@@ -29,10 +29,10 @@ HashKeys::HashKeys() {
 }
 
 
-HashKeys::~HashKeys() {
+BlzKeygen::~BlzKeygen() {
 }
 
-uint64_t HashKeys::hash(const std::string & k, uint64_t offset) {
+uint64_t BlzKeygen::hash(const std::string & k, uint16_t offset) {
     uint64_t seed_a = 0x7FED7FED, seed_b = 0xEEEEEEEE;
     uint64_t ch;
     for (int i = 0 ; i < k.length() ; i++) {

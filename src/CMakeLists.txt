@@ -8,7 +8,9 @@
 ADD_EXECUTABLE(DictReader main.cc)
 
 
-ADD_DEPENDENCIES(DictReader inihpp_static argcv_util_static argcv_util_dict_static)
+ADD_DEPENDENCIES(DictReader inihpp_static)
+ADD_DEPENDENCIES(DictReader argcv_util_static)
+ADD_DEPENDENCIES(DictReader argcv_util_dict_static)
 
 #IF(OPTIONS_USE_EXTERNAL_CRFPP)
 #	ADD_DEPENDENCIES(DictReader crfpp_proj)
@@ -18,6 +20,7 @@ ADD_DEPENDENCIES(DictReader inihpp_static argcv_util_static argcv_util_dict_stat
 ADD_DEPENDENCIES(DictReader leveldb_proj)
 #ENDIF(OPTIONS_USE_EXTERNAL_LEVELDB)
 
+ADD_DEPENDENCIES(DictReader argcv_util_oid_static)
 
 #  executable target links
 # TARGET_LINK_LIBRARIES(abcs relfiles)
@@ -27,7 +30,25 @@ TARGET_LINK_LIBRARIES(DictReader pthread) # for leveldb
 #TARGET_LINK_LIBRARIES(DictReader crfpp)
 TARGET_LINK_LIBRARIES(DictReader argcv_util_static)
 TARGET_LINK_LIBRARIES(DictReader argcv_util_dict_static)
+TARGET_LINK_LIBRARIES(DictReader argcv_util_oid_static)
 
 #  executable properties
 SET_TARGET_PROPERTIES(DictReader PROPERTIES OUTPUT_NAME "DictReader")
+
+
+ADD_EXECUTABLE(HelloML hello_ml.cc)
+
+ADD_DEPENDENCIES(HelloML inihpp_static)
+ADD_DEPENDENCIES(HelloML argcv_util_static)
+ADD_DEPENDENCIES(HelloML argcv_ml_gd_static)
+
+
+TARGET_LINK_LIBRARIES(HelloML inihpp_static)
+TARGET_LINK_LIBRARIES(HelloML argcv_util_static)
+TARGET_LINK_LIBRARIES(HelloML argcv_ml_gd_static)
+
+
+
+#  executable properties
+SET_TARGET_PROPERTIES(HelloML PROPERTIES OUTPUT_NAME "HelloML")
 

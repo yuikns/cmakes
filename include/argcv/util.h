@@ -20,21 +20,21 @@ namespace util {
 // uint64_t hash(const std::string & k, uint64_t offset);
 
 // c++ style hash key genertator
-class HashKeys {
+class BlzKeygen {
  public :
-    static HashKeys & instance() {
-        static HashKeys hk;
+    static BlzKeygen & instance() {
+        static BlzKeygen hk;
         return hk;
     }
 
-    virtual ~HashKeys();
+    virtual ~BlzKeygen();
     // k : string , offset should not too much , 0~3 in suggestion
-    uint64_t hash(const std::string & k, uint64_t offset);
+    uint64_t hash(const std::string & k, uint16_t offset);
 
  private :
-    HashKeys();  // Private constructor
-    HashKeys(const HashKeys &);  // Prevent copy-construction
-    HashKeys &operator=(const HashKeys &);  // Prevent assignment
+    BlzKeygen();  // Private constructor
+    BlzKeygen(const BlzKeygen &);  // Prevent copy-construction
+    BlzKeygen &operator=(const BlzKeygen &);  // Prevent assignment
     uint64_t crypt[0x500];  // Seed
 };
 

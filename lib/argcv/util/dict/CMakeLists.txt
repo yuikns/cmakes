@@ -12,14 +12,16 @@ SET_TARGET_PROPERTIES(argcv_util_dict_static PROPERTIES OUTPUT_NAME "argcv_util_
 
 ADD_DEPENDENCIES(argcv_util_dict leveldb_proj)
 ADD_DEPENDENCIES(argcv_util_dict argcv_util)
+
 TARGET_LINK_LIBRARIES(argcv_util_dict leveldb)
 TARGET_LINK_LIBRARIES(argcv_util_dict argcv_util)
+TARGET_LINK_LIBRARIES(argcv_util_dict pthread)  # for leveldb
 
 ADD_DEPENDENCIES(argcv_util_dict_static leveldb_proj)
 ADD_DEPENDENCIES(argcv_util_dict_static argcv_util_static)
 TARGET_LINK_LIBRARIES(argcv_util_dict_static leveldb)
 TARGET_LINK_LIBRARIES(argcv_util_dict_static argcv_util_static)
-
+TARGET_LINK_LIBRARIES(argcv_util_dict_static pthread) # for leveldb
 
 
 # INSTALL (TARGETS argcv_util argcv_util_static
