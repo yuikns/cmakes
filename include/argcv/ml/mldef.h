@@ -57,7 +57,7 @@ class DataSet {
         return ds.push_back(val);
     }
 
-    void add(X x[], int len,Y y) {
+    void add(X x[], int len, Y y) {
         std::pair<std::vector<X>, Y> val(
             std::vector<X>(x, x + len), y);
         return ds.push_back(val);

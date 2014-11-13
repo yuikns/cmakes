@@ -10,13 +10,17 @@ namespace argcv {
 namespace ml {
 namespace gd {
 
-// dataset , learn rate , lose control , weights , max step , dynamic learn rate ? 
-double sgd(DDDataSet ds,double delta,double epsilon,std::vector<double> * _w,
+// dataset , learn rate , lose control ,
+// weights , max step , dynamic learn rate ?
+double sgd(DDDataSet ds, double delta,
+        double epsilon, std::vector<double> * _w,
         uint64_t step_limit = 1000, bool dynamd = true);
-double bgd(DDDataSet ds,double delta,double epsilon,std::vector<double> * _w,
+double bgd(DDDataSet ds, double delta,
+        double epsilon, std::vector<double> * _w,
         uint64_t step_limit = 1000, bool dynamd = true);
 
-inline double gd(DDDataSet ds,double delta,double epsilon,std::vector<double> * _w,
+inline double gd(DDDataSet ds, double delta,
+        double epsilon, std::vector<double> * _w,
         uint64_t step_limit = 1000, bool dynamd = true) {
     return sgd(ds, delta, epsilon, _w, dynamd);
 }

@@ -54,13 +54,13 @@ int main(int argc, char *argv[]) {
         printf("%s %llu ~ %d \n", buff , d[buff], d.level(buff));
         printf("input a chinese phrase , it will return a fequency .. \n");
     }
-    
+
     ObjId & oid = ObjId::instance();
-    printf("oid:%s\n",oid.id().c_str());
-    printf("oid:%s\n",oid.id().c_str());
-    printf("oid:%s\n",oid.id().c_str());
-    printf("oid:%s\n",oid.id().c_str());
-    printf("oid:%s\n",oid.id().c_str());
+    printf("oid:%s\n", oid.id().c_str());
+    printf("oid:%s\n", oid.id().c_str());
+    printf("oid:%s\n", oid.id().c_str());
+    printf("oid:%s\n", oid.id().c_str());
+    printf("oid:%s\n", oid.id().c_str());
     return 0;
 }
 

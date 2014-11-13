@@ -1,3 +1,4 @@
+// Copyright 2014 Yu Jing<yujing5b5d@gmail.com>
 #include <stdio.h>
 #include <stdlib.h>
 
