@@ -3,7 +3,7 @@
 // #include <iostream>
 // #include "crfpp.h" // crfpp
 #include "conf/config.h"
-#include "argcv/util.h"
+#include "argcv/util/util.h"
 #include "argcv/util/dict.h"
 #include "argcv/util/oid.h"
 #include "inih/INIReader.h"

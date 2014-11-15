@@ -35,6 +35,7 @@ TARGET_LINK_LIBRARIES(DictReader argcv_util_oid_static)
 #  executable properties
 SET_TARGET_PROPERTIES(DictReader PROPERTIES OUTPUT_NAME "DictReader")
 
+##################################### End Of DictReader ##################################
 
 ADD_EXECUTABLE(HelloML hello_ml.cc)
 
@@ -48,7 +49,23 @@ TARGET_LINK_LIBRARIES(HelloML argcv_util_static)
 TARGET_LINK_LIBRARIES(HelloML argcv_ml_gd_static)
 
 
-
 #  executable properties
 SET_TARGET_PROPERTIES(HelloML PROPERTIES OUTPUT_NAME "HelloML")
+
+##################################### End Of HelloML ##################################
+
+ADD_EXECUTABLE(HelloGraph hello_graph.cc)
+
+ADD_DEPENDENCIES(HelloGraph inihpp_static)
+ADD_DEPENDENCIES(HelloGraph argcv_util_static)
+ADD_DEPENDENCIES(HelloGraph argcv_graph_static)
+
+
+TARGET_LINK_LIBRARIES(HelloGraph inihpp_static)
+TARGET_LINK_LIBRARIES(HelloGraph argcv_util_static)
+TARGET_LINK_LIBRARIES(HelloGraph argcv_graph_static)
+
+
+#  executable properties
+SET_TARGET_PROPERTIES(HelloGraph PROPERTIES OUTPUT_NAME "HelloGraph")
 

@@ -7,7 +7,7 @@
 
 #include "argcv/ml/mldef.h"
 #include "argcv/ml/gd/gd.h"
-#include "argcv/util.h"
+#include "argcv/util/util.h"
 
 // using argcv::ml::DataSet;
 // using argcv::ml::DDataSet;

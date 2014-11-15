@@ -40,7 +40,6 @@ class Dict {
     }
 
  private :
-
     Dict();  // Private constructor
     Dict(const Dict &);  // Prevent copy-construction
     Dict&  operator=(const Dict &);  // Prevent assignment

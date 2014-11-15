@@ -1,6 +1,6 @@
 // Copyright 2014 Yu Jing<yujing5b5d@gmail.com>
-#ifndef INCLUDE_ARGCV_UTIL_H_
-#define INCLUDE_ARGCV_UTIL_H_
+#ifndef INCLUDE_ARGCV_UTIL_UTIL_H_
+#define INCLUDE_ARGCV_UTIL_UTIL_H_
 
 #include <cmath>
 #include <ctime>
@@ -75,5 +75,5 @@ std::vector<std::string> split(const std::string &s, const std::string &delim);
 }  // namespace util
 }  // namespace argcv
 
-#endif  // INCLUDE_ARGCV_UTIL_H_
+#endif  // INCLUDE_ARGCV_UTIL_UTIL_H_
 

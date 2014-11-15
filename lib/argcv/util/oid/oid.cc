@@ -9,7 +9,7 @@
 #include <string>
 #include <mutex>  // for std::lock_guard
 
-#include "argcv/util.h"
+#include "argcv/util/util.h"
 
 namespace argcv {
 namespace util {
