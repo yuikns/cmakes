@@ -6,6 +6,7 @@
 
 #include <string>
 #include <vector>
+#include <set>
 
 // #include <thread>  // std::thread
 #include <mutex>  // std::mutex
@@ -38,13 +39,17 @@ class Edge {
                 from_id(m_from_id),
                 to_id(m_to_id),
                 db(m_db),
-                _gg_mtx(m_gg_mtx) {}
+                _gg_mtx(m_gg_mtx) {
+        ft_id.assign(from_id + to_id);
+        // tf_id.assign(to_id + from_id);
+    }
     virtual ~Edge() {}
     const std::string &from() const { return from_id; }
     const std::string &to() const { return to_id; }
     Agent operator[] (const std::string &k) { return Agent(*this, k); }
     const std::vector<std::string> keys() const ;
     bool drop();
+    std::set<std::string> drop_set();
     bool valid() { return _valid; }
 
     const std::string get(const std::string & k);
@@ -54,6 +59,8 @@ class Edge {
     bool _valid = true;
     const std::string from_id;
     const std::string to_id;
+    std::string ft_id;
+    // std::string tf_id;
     leveldb::DB *db;
     std::mutex *_gg_mtx;  // mutex for critical section
 };
@@ -87,6 +94,7 @@ class Vertex {
     const std::vector<Edge> outE(const std::string & val="", const std::string & field = "label");
     const std::vector<std::string> keys() const ;
     bool drop();
+    std::set<std::string> drop_set();
     bool valid() { return _valid; }
 
     const std::string get(const std::string & k);  // get value by field
@@ -111,11 +119,13 @@ class Graph {
 
     Vertex new_v();
     Vertex id_v(const std::string &id);
-    Edge id_e(const std::string &id);
 
-    Vertex find_v(const std::string & val, const std::string & field="name");
-    Edge find_e(const std::string & val, const std::string & field="label");
+    Vertex find_one_v(const std::string & val, const std::string & field="name");
+    Edge find_one_e(const std::string & val, const std::string & field="label");
     
+    std::vector<Vertex> find_v(const std::string & val, const std::string & field="name");
+    std::vector<Edge> find_e(const std::string & val, const std::string & field="label");
+
     void test();
     void dump();
 
