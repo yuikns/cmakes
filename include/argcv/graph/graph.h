@@ -46,6 +46,7 @@ class Edge {
     virtual ~Edge() {}
     const std::string &from() const { return from_id; }
     const std::string &to() const { return to_id; }
+    const std::string &ft() const {return ft_id; }
     Agent operator[] (const std::string &k) { return Agent(*this, k); }
     const std::vector<std::string> keys() const ;
     bool drop();
