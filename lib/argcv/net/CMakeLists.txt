@@ -1,0 +1,28 @@
+SET(ARGCV_NET_VERSION 1.0)
+SET(ARGCV_NET_SOVERSION 0.1)
+
+################### UTIL EXT : GRAPH
+AUX_SOURCE_DIRECTORY(. LIBARGCV_NET_SRC)
+ADD_LIBRARY(argcv_net SHARED ${LIBARGCV_NET_SRC})
+SET_TARGET_PROPERTIES(argcv_net PROPERTIES VERSION ${ARGCV_NET_VERSION} SOVERSION ${ARGCV_NET_SOVERSION})
+
+ADD_LIBRARY(argcv_net_static STATIC ${LIBARGCV_NET_SRC})
+SET_TARGET_PROPERTIES(argcv_net_static PROPERTIES OUTPUT_NAME "argcv_net")
+
+ADD_DEPENDENCIES(argcv_net argcv_util_sys)
+
+TARGET_LINK_LIBRARIES(argcv_net argcv_util_sys)
+
+
+ADD_DEPENDENCIES(argcv_net_static argcv_util_sys_static)
+
+TARGET_LINK_LIBRARIES(argcv_net_static argcv_util_sys_static)
+
+# INSTALL (TARGETS argcv_util argcv_util_static
+#     LIBRARY DESTINATION lib64
+#     ARCHIVE DESTINATION lib64)
+
+# INSTALL (FILES ${${CMAKE_PROJECT_NAME}_SOURCE_DIR}/include/argcv/util.h DESTINATION include/argcv/ )
+
+
+

@@ -60,7 +60,31 @@ void Graph::init() {
 Edge Graph::link(const std::string & from_id,
         const std::string & to_id,
         bool index) {
-    return Edge();
+    _gg_mtx->lock();
+    bool valid = false;
+    if(ldb_has(db, kVertexPrefix + from_id) 
+        && ldb_has(db, kVertexPrefix + to_id)) {
+        valid = true;
+        // inline bool ldb_batch_add(leveldb::DB* db, const std::map<std::string,std::string> & kvs) 
+        std::string tmp_key;
+        std::map<std::string,std::string> kvs;
+        tmp_key = kEdgePrefix;
+        tmp_key += from_id;
+        tmp_key += to_id;
+        kvs.insert(std::make_pair(tmp_key,""));
+        
+        tmp_key = kIndexVertexOutPrefix;
+        tmp_key += from_id;
+        kvs.insert(std::make_pair(tmp_key,""));
+        
+        tmp_key = kIndexVertexInPrefix;
+        tmp_key += to_id;
+        kvs.insert(std::make_pair(tmp_key,""));
+        
+        ldb_batch_add(db, kvs );
+    }
+    _gg_mtx->unlock();
+    return valid ? Edge(from_id, to_id, db, _gg_mtx): Edge();
 }
 
 Vertex Graph::new_v() {
@@ -74,7 +98,19 @@ Vertex Graph::id_v(const std::string &id) {
 }
 
 Vertex Graph::find_one_v(const std::string & val, const std::string & field) {
-    
+    std::string index_key(kIndexVertexPrefix);
+    index_key += field ;
+    index_key += kPropGlue;
+    index_key += val ;
+    index_key += kPropGlue;
+    //inline bool ldb_get_one(leveldb::DB* db, const std::string &key, std::string *_f_key , std::string * _val) {
+    std::string k;
+    std::string v;
+    if(ldb_get_one(db, index_key, &k, &v )) {
+        
+    } else {
+        return Vertex();
+    }
 }
 
 Edge Graph::find_one_e(const std::string & val, const std::string & field) {

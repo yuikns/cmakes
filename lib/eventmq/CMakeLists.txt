@@ -1,0 +1,30 @@
+SET(EVENT_MQ_VERSION 1.0)
+SET(EVENT_MQ_SOVERSION 0.1)
+
+################### UTIL EXT : OID
+AUX_SOURCE_DIRECTORY(. LIBEVENT_MQ_SRC)
+# SET(LIBEVENT_MQ_SRC event_mq.cc)
+ADD_LIBRARY(event_mq SHARED ${LIBEVENT_MQ_SRC})
+SET_TARGET_PROPERTIES(event_mq PROPERTIES VERSION ${EVENT_MQ_VERSION} SOVERSION ${EVENT_MQ_SOVERSION})
+
+ADD_LIBRARY(event_mq_static STATIC ${LIBEVENT_MQ_SRC})
+SET_TARGET_PROPERTIES(event_mq_static PROPERTIES OUTPUT_NAME "event_mq")
+
+#ADD_DEPENDENCIES(event_mq leveldb_proj)
+#ADD_DEPENDENCIES(event_mq pthread)
+TARGET_LINK_LIBRARIES(event_mq pthread)
+TARGET_LINK_LIBRARIES(event_mq event)
+
+#ADD_DEPENDENCIES(event_mq_static leveldb_proj)
+#ADD_DEPENDENCIES(event_mq_static pthread)
+TARGET_LINK_LIBRARIES(event_mq_static pthread)
+TARGET_LINK_LIBRARIES(event_mq_static event)
+
+# INSTALL (TARGETS argcv_util argcv_util_static
+#     LIBRARY DESTINATION lib64
+#     ARCHIVE DESTINATION lib64)
+
+# INSTALL (FILES ${${CMAKE_PROJECT_NAME}_SOURCE_DIR}/include/argcv/util.h DESTINATION include/argcv/ )
+
+
+

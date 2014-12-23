@@ -48,14 +48,14 @@ class Vertex {
     virtual ~Vertex() {}
     Agent operator[] (const std::string &k) {return Agent(*this, k);}
 
-    const std::string & id() { return _id; }
-    const std::vector<Vertex> inV(const std::string & val="", const std::string & field = "name");
-    const std::vector<Vertex> outV(const std::string & val="", const std::string & field = "name");
-    const std::vector<Edge> inE(const std::string & val="", const std::string & field = "label");
-    const std::vector<Edge> outE(const std::string & val="", const std::string & field = "label");
+    const std::string & id() const { return _id; }
+    const std::vector<Vertex> inV(const std::string & val="", const std::string & field = "name") const;
+    const std::vector<Vertex> outV(const std::string & val="", const std::string & field = "name") const;
+    const std::vector<Edge> inE(const std::string & val="", const std::string & field = "label") const;
+    const std::vector<Edge> outE(const std::string & val="", const std::string & field = "label") const;
     const std::vector<std::string> keys() const ;
     bool drop();
-    std::set<std::string> drop_set();
+    const std::set<std::string> drop_set() const ;
     bool valid() { return _valid; }
 
     const std::string get(const std::string & k);  // get value by field

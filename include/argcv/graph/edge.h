@@ -59,7 +59,7 @@ class Edge {
     Agent operator[] (const std::string &k) { return Agent(*this, k); }
     const std::vector<std::string> keys() const ;
     bool drop();
-    std::set<std::string> drop_set();
+    const std::set<std::string> drop_set() const ;
     bool valid() { return _valid; }
 
     const std::string get(const std::string & k);

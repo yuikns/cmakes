@@ -69,3 +69,50 @@ TARGET_LINK_LIBRARIES(HelloGraph argcv_graph_static)
 #  executable properties
 SET_TARGET_PROPERTIES(HelloGraph PROPERTIES OUTPUT_NAME "HelloGraph")
 
+##################################### End Of HelloGraph ##################################
+
+
+##############################################################
+####
+#### EVENT SECTION 
+####
+##############################################################
+
+### SERVER 
+ADD_EXECUTABLE(HelloEventS hello_event_s.cc)
+
+#ADD_DEPENDENCIES(HelloEventS event)
+ADD_DEPENDENCIES(HelloEventS event_mq)
+
+TARGET_LINK_LIBRARIES(HelloEventS event)
+TARGET_LINK_LIBRARIES(HelloEventS event_mq)
+
+#  executable properties
+SET_TARGET_PROPERTIES(HelloEventS PROPERTIES OUTPUT_NAME "HelloEventS")
+
+
+### CLIENT
+ADD_EXECUTABLE(HelloEventC hello_event_c.cc)
+
+#ADD_DEPENDENCIES(HelloEventS event)
+ADD_DEPENDENCIES(HelloEventC event_mq)
+
+TARGET_LINK_LIBRARIES(HelloEventC event)
+TARGET_LINK_LIBRARIES(HelloEventC event_mq)
+
+#  executable properties
+SET_TARGET_PROPERTIES(HelloEventC PROPERTIES OUTPUT_NAME "HelloEventC")
+
+
+
+
+
+
+
+
+
+
+
+
+
+

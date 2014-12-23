@@ -36,7 +36,7 @@ bool Edge::drop() {
     return status;
 }
 
-std::set<string> Edge::drop_set() {
+const std::set<string> Edge::drop_set() const{
     std::set<std::string> rm_keys;
     std::string tmp_key;
     tmp_key = kEdgePrefix;
