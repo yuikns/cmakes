@@ -19,7 +19,7 @@
 #include "argcv/graph/edge.h"
 #include "argcv/graph/vertex.h"
 #include "./ldb_def.h"
-
+#include "./g_utils.h"
 
 namespace argcv {
 namespace graph {
@@ -58,33 +58,39 @@ void Graph::init() {
 }
 
 Edge Graph::link(const std::string & from_id,
-        const std::string & to_id,
-        bool index) {
-    _gg_mtx->lock();
-    bool valid = false;
-    if(ldb_has(db, kVertexPrefix + from_id) 
-        && ldb_has(db, kVertexPrefix + to_id)) {
-        valid = true;
-        // inline bool ldb_batch_add(leveldb::DB* db, const std::map<std::string,std::string> & kvs) 
-        std::string tmp_key;
-        std::map<std::string,std::string> kvs;
-        tmp_key = kEdgePrefix;
-        tmp_key += from_id;
-        tmp_key += to_id;
-        kvs.insert(std::make_pair(tmp_key,""));
+        const std::string & to_id) {
+    Edge e(from_id, to_id, db, _gg_mtx); // check exists 
+    if(e.valid()) {
+        return e;
+    }else{
+        bool valid = false;
+        _gg_mtx->lock();
+        if(ldb_has(db, kVertexPrefix + from_id) 
+            && ldb_has(db, kVertexPrefix + to_id)) {
+            valid = true;
+            // inline bool ldb_batch_add(leveldb::DB* db, const std::map<std::string,std::string> & kvs) 
+            std::string tmp_key;
+            std::map<std::string,std::string> kvs;
+            //tmp_key = kEdgePrefix;
+            //tmp_key += from_id;
+            //tmp_key += to_id;
+            //kvs.insert(std::make_pair(tmp_key,""));
         
-        tmp_key = kIndexVertexOutPrefix;
-        tmp_key += from_id;
-        kvs.insert(std::make_pair(tmp_key,""));
+            tmp_key = kIndexVertexOutPrefix;
+            tmp_key += from_id;
+            tmp_key += to_id;
+            kvs.insert(std::make_pair(tmp_key,""));
         
-        tmp_key = kIndexVertexInPrefix;
-        tmp_key += to_id;
-        kvs.insert(std::make_pair(tmp_key,""));
+            tmp_key = kIndexVertexInPrefix;
+            tmp_key += to_id;
+            tmp_key += from_id;
+            kvs.insert(std::make_pair(tmp_key,""));
         
-        ldb_batch_add(db, kvs );
+            ldb_batch_add(db, kvs );
+        }
+        _gg_mtx->unlock();
+        return valid ? Edge(from_id, to_id, db, _gg_mtx): Edge();
     }
-    _gg_mtx->unlock();
-    return valid ? Edge(from_id, to_id, db, _gg_mtx): Edge();
 }
 
 Vertex Graph::new_v() {
@@ -101,32 +107,96 @@ Vertex Graph::find_one_v(const std::string & val, const std::string & field) {
     std::string index_key(kIndexVertexPrefix);
     index_key += field ;
     index_key += kPropGlue;
-    index_key += val ;
+    index_key += gval_encode(val);
     index_key += kPropGlue;
     //inline bool ldb_get_one(leveldb::DB* db, const std::string &key, std::string *_f_key , std::string * _val) {
     std::string k;
     std::string v;
     if(ldb_get_one(db, index_key, &k, &v )) {
-        
+        // k : _id
+        // value : nothing
+        return id_v(k);
     } else {
         return Vertex();
     }
 }
 
 Edge Graph::find_one_e(const std::string & val, const std::string & field) {
-    
+    std::string index_key(kIndexEdgePrefix);
+    index_key += field;
+    index_key += kPropGlue;
+    index_key += gval_encode(val);
+    index_key += kPropGlue;
+    //index_key += ft_id;
+    std::string k;
+    std::string v;
+    if(ldb_get_one(db, index_key, &k, &v)) {
+        // k : ft_id
+        if(k.length() == kFtLen) {
+            std::string from_id = k.substr(0,kOidLen);
+            std::string to_id = k.substr(kOidLen,kOidLen);
+            return Edge(from_id, to_id, db, _gg_mtx);
+        }else {
+            return Edge();
+        }
+    } else {
+        return Edge();
+    }
 }
 
 std::vector<Vertex> Graph::find_v(const std::string & val, const std::string & field) {
-    
+    std::vector<Vertex> vv;
+    std::string index_key(kIndexVertexPrefix);
+    index_key += field ;
+    index_key += kPropGlue;
+    index_key += gval_encode(val);
+    index_key += kPropGlue;
+    std::vector<std::string>  ks;
+    //printf("[%s_%d]find v: %s\n",__FILE__,__LINE__,index_key.c_str());
+    ldb_vec_scan(db, index_key, &ks);
+    for(std::vector<std::string>::const_iterator it = ks.begin();
+        it != ks.end();
+        it++ ) {
+            printf("vid:%s\n",it->c_str());
+            Vertex v(*it, db, _gg_mtx);
+            if(v.valid()) {
+                vv.push_back(v);
+            }
+    }
+    return vv;
 }
 
 std::vector<Edge> Graph::find_e(const std::string & val, const std::string & field) {
+    std::vector<Edge> ev;
+    std::string index_key(kIndexEdgePrefix);
+    index_key += field;
+    index_key += kPropGlue;
+    index_key += gval_encode(val);
+    index_key += kPropGlue;
+    std::vector<std::string>  ks;
+    //printf("[%s_%d]find e: %s\n",__FILE__,__LINE__,index_key.c_str());
+    ldb_vec_scan(db,index_key,&ks);
+    for(std::vector<std::string>::const_iterator it = ks.begin();
+        it != ks.end();
+        it++ ) {
+            printf("ftid:%s\n",it->c_str());
+            if(it->length() == kFtLen) {
+                std::string from_id = it->substr(0,kOidLen);
+                std::string to_id = it->substr(kOidLen,kOidLen);
+                Edge e(from_id, to_id, db, _gg_mtx);
+                if(e.valid()){
+                    ev.push_back(e);
+                }
+            }else{
+                printf("error len : %s %lu \n",it->c_str(), it->length());
+            }
+    }
+    return ev;
 }
 
 void Graph::dump() {
     std::map<std::string,std::string> dumps;
-    ldb_map_scan(db,"d:",&dumps);
+    ldb_map_scan(db,"",&dumps);
     for (std::map<std::string,std::string>::const_iterator it= dumps.begin();
             it!=dumps.end();
             it++ ) {

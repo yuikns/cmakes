@@ -56,7 +56,7 @@ class Vertex {
     const std::vector<std::string> keys() const ;
     bool drop();
     const std::set<std::string> drop_set() const ;
-    bool valid() { return _valid; }
+    bool valid();
 
     const std::string get(const std::string & k);  // get value by field
     void set(const std::string &k, const std::string &v, bool index = true);  // set value by field

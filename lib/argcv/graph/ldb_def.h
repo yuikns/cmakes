@@ -40,6 +40,8 @@ const std::string kIndexVertexOutPrefix = kOutGlue + kIndexVertexPrefix;
 // const std::string kIndexEdgeInPrefix = kInGlue + kIndexEdgePrefix;
 // const std::string kIndexEdgeOutPrefix = kOutGlue + kIndexEdgePrefix;
 
+const unsigned kOidLen = 47;
+const unsigned kFtLen = 47 * 2;
 
 inline void ldb_map_scan(leveldb::DB* db, const std::string &base, 
         std::map<std::string,std::string> * _kvs) {
@@ -239,7 +241,7 @@ inline bool ldb_batch_add(leveldb::DB* db, const std::map<std::string,std::strin
     for (std::map<std::string,std::string>::const_iterator it= kvs.begin();
             it!=kvs.end();
             it++ ) {
-                printf("ldb_batch_add %s -> %s\n", it->first.c_str(), it->second.c_str());
+        //printf("ldb_batch_add %s -> %s\n", it->first.c_str(), it->second.c_str());
         _wb->Put(it->first, it->second);
     }
     bool rst = ((db->Write(leveldb::WriteOptions(), _wb)).ok());

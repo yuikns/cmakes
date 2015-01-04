@@ -28,8 +28,7 @@ class Graph {
     bool err() const { return err_flag; }
 
     Edge link(const std::string &from_id,
-            const std::string & to_id,
-            bool index = true);
+            const std::string & to_id);
 
     Vertex new_v();
     Vertex id_v(const std::string &id);

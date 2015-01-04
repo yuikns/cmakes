@@ -19,6 +19,7 @@
 #include "argcv/util/oid.h"
 #include "argcv/graph/edge.h"
 #include "./ldb_def.h"
+#include "./g_utils.h"
 
 namespace argcv {
 namespace graph {
@@ -91,7 +92,8 @@ const std::vector<Edge> Vertex::inE(const std::string & val, const std::string &
         for(std::vector<std::string>::const_iterator it = ine_keys.begin();
                 it != ine_keys.end();
                 it ++) {
-            ines.push_back(Edge(_id, *it, db, _gg_mtx));
+            //ines.push_back(Edge(_id, *it, db, _gg_mtx));
+            ines.push_back(Edge(*it, _id, db, _gg_mtx));
         }
     } else {
         for(std::vector<std::string>::const_iterator it = ine_keys.begin();
@@ -103,7 +105,7 @@ const std::vector<Edge> Vertex::inE(const std::string & val, const std::string &
             qkey += *it;
             qkey += field;
             if(ldb_get(db, qkey, &prop) && val.compare(prop) == 0) {
-                ines.push_back(Edge(_id, *it, db, _gg_mtx));
+                ines.push_back(Edge(*it, _id, db, _gg_mtx));
             }
         }
     }
@@ -226,12 +228,16 @@ void Vertex::set(const std::string &k, const std::string &v, bool index) {  // s
         index_key = kIndexVertexPrefix;
         index_key += k;
         index_key += kPropGlue;
-        index_key += v;
+        index_key += gval_encode(v);
         index_key += kPropGlue;
         index_key += _id;
         ldb_set(db, index_key);
     }
     _gg_mtx->unlock();
+}
+
+bool Vertex::valid(){
+    return _valid && ldb_has(db, kVertexPrefix + _id);
 }
 
 }  // namespace graph

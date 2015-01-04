@@ -1,6 +1,5 @@
 #include "argcv/graph/edge.h"
 
-
 #include <stdio.h>
 
 #include <string>
@@ -19,6 +18,7 @@
 #include "argcv/util/oid.h"
 #include "argcv/graph/vertex.h"
 #include "./ldb_def.h"
+#include "./g_utils.h"
 
 namespace argcv {
 namespace graph {
@@ -39,14 +39,15 @@ bool Edge::drop() {
 const std::set<string> Edge::drop_set() const{
     std::set<std::string> rm_keys;
     std::string tmp_key;
-    tmp_key = kEdgePrefix;
-    tmp_key += ft_id;
-    rm_keys.insert(tmp_key);
+    //tmp_key = kEdgePrefix;
+    //tmp_key += ft_id;
+    //rm_keys.insert(tmp_key);
     tmp_key = kIndexVertexOutPrefix;
-    tmp_key += from_id;
+    tmp_key += ft_id;
     rm_keys.insert(tmp_key); // source out
     tmp_key = kIndexVertexInPrefix;
     tmp_key += to_id;
+    tmp_key += from_id;
     rm_keys.insert(tmp_key); // dest in
     std::map<std::string,std::string> pro_map;
     tmp_key = kPropEdgePrefix;
@@ -104,7 +105,7 @@ void Edge::set(const std::string &k, const std::string &v, bool index) {
         index_key = kIndexEdgePrefix;
         index_key += k;
         index_key += kPropGlue;
-        index_key += v;
+        index_key += gval_encode(v);
         index_key += kPropGlue;
         index_key += ft_id;
         ldb_set(db, index_key);
@@ -112,6 +113,12 @@ void Edge::set(const std::string &k, const std::string &v, bool index) {
     _gg_mtx->unlock();
 }
 
+bool Edge::valid(){
+    if(!_valid) return false;
+    std::string tmp_key = kIndexVertexOutPrefix;
+    tmp_key += ft_id;
+    return ldb_has(db, tmp_key);
+}
 
 
 }  // namespace graph
