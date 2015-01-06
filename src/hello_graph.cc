@@ -30,6 +30,7 @@ int main(int argc, char * argv[]) {
     printf("bid: %s , len: %lu\n",b.id().c_str(),b.id().length());
     Vertex c = g.new_v();
     c["name"] = "VNAME_C";
+    printf("cid: %s , len: %lu\n",b.id().c_str(),b.id().length());
     
     Vertex ac = g.id_v(a.id());
     ac["flag"] = "set flag by ac";
@@ -50,14 +51,14 @@ int main(int argc, char * argv[]) {
     auto aov = a.outV();
     for(auto it = aov.begin() ; it != aov.end() ; it ++ ) {
         printf("V<aov> is valid : %c \n", it->valid() ? 'Y':'N');
-        (*it)["label"]="edge";
+        //(*it)["label"]="edge";
         printf("aov id %s \n", it->id().c_str() );
     }
     
     auto biv = b.inV();
     for(auto it = biv.begin() ; it != biv.end() ; it ++ ) {
         printf("E<biv> is valid : %c \n", it->valid() ? 'Y':'N');
-        (*it)["label"]="edge";
+        //(*it)["label"]="edge";
         //printf("biv id %s \n", it->id().c_str() );
     }
 
@@ -77,7 +78,12 @@ int main(int argc, char * argv[]) {
     t.label("t1");
     //time_point  t1 = hrclock::now();
     //g.test();
-    //g.dump();
+
+    //a.drop();
+    //b.drop();
+    //c.drop();
+    printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DUMP\n");
+    g.dump();
     //time_point  t2 = hrclock::now();
     t.label("t2");
     printf("time cost : all : %f ms, t1->t2 : %f ms, from t1 : %f ms, from t2 : %f ms, to t1: %f ms, to t2: %f ms\n",

@@ -194,7 +194,7 @@ const std::set<std::string> Vertex::drop_set() const {
         tmp_key = kIndexVertexPrefix;
         tmp_key += it->first;
         tmp_key += kPropGlue;
-        tmp_key += it->second;
+        tmp_key += gval_encode(it->second);
         tmp_key += kPropGlue;
         tmp_key += _id;
         rm_keys.insert(tmp_key);

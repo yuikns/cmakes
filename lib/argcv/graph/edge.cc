@@ -65,7 +65,7 @@ const std::set<string> Edge::drop_set() const{
         tmp_key = kIndexEdgePrefix;
         tmp_key += it->first;
         tmp_key += kPropGlue;
-        tmp_key += it->second;
+        tmp_key += gval_encode(it->second);
         tmp_key += kPropGlue;
         tmp_key += ft_id;
         rm_keys.insert(tmp_key);

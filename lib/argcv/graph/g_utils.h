@@ -11,7 +11,9 @@ namespace graph {
 
 inline const std::string gval_encode(const std::string & ival) {
     //return ival;
-    return std::to_string(argcv::util::BlzKeygen::instance().hash(ival,0));
+    return std::to_string(argcv::util::BlzKeygen::instance().hash(ival,0)).append("#")
+            .append(std::to_string(argcv::util::BlzKeygen::instance().hash(ival,1))).append("#")
+                .append(std::to_string(argcv::util::BlzKeygen::instance().hash(ival,2)));
 }
 
 //inline const std::string gval_decode(const std::string & ival) {
