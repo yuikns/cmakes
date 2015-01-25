@@ -126,15 +126,47 @@ TARGET_LINK_LIBRARIES(HelloGL ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})
 #  executable properties
 SET_TARGET_PROPERTIES(HelloGL PROPERTIES OUTPUT_NAME "HelloGL")
 
+
+##############################################################
+####
+#### Mongo Section
+####
+##############################################################
+ADD_EXECUTABLE(HelloMongo hello_mongo.cc)
+
+ADD_DEPENDENCIES(HelloMongo inihpp_static argcv_util_static argcv_util_dict_static)
+
+ADD_DEPENDENCIES(HelloMongo leveldb_proj)
+ADD_DEPENDENCIES(HelloMongo mongo_cxx_proj)
+
+TARGET_LINK_LIBRARIES(HelloMongo inihpp_static)
+TARGET_LINK_LIBRARIES(HelloMongo leveldb)
+TARGET_LINK_LIBRARIES(HelloMongo pthread) # for leveldb
+#TARGET_LINK_LIBRARIES(HelloMongo crfpp)
+TARGET_LINK_LIBRARIES(HelloMongo argcv_util_static)
+TARGET_LINK_LIBRARIES(HelloMongo argcv_util_dict_static)
+
+# for mongodb
+TARGET_LINK_LIBRARIES(HelloMongo pthread)
+TARGET_LINK_LIBRARIES(HelloMongo mongoclient)
+TARGET_LINK_LIBRARIES(HelloMongo boost_thread-mt)
+TARGET_LINK_LIBRARIES(HelloMongo boost_filesystem)
+TARGET_LINK_LIBRARIES(HelloMongo boost_program_options)
+TARGET_LINK_LIBRARIES(HelloMongo boost_system)
+TARGET_LINK_LIBRARIES(HelloMongo ssl)
+TARGET_LINK_LIBRARIES(HelloMongo crypto)
+
+SET_TARGET_PROPERTIES(HelloMongo PROPERTIES OUTPUT_NAME "HelloMongo")
+
 #################################################################
 ####
 #### Protobuf
 ####
 #################################################################
 
-
-INCLUDE(FindProtobuf)
-FIND_PACKAGE(Protobuf REQUIRED)
+## NOT COMPLETED
+# INCLUDE(FindProtobuf)
+# FIND_PACKAGE(Protobuf REQUIRED)
 
 ADD_EXECUTABLE(HelloPb hello_protobuf.cc)
 
