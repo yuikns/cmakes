@@ -105,6 +105,47 @@ SET_TARGET_PROPERTIES(HelloEventC PROPERTIES OUTPUT_NAME "HelloEventC")
 
 
 
+##############################################################
+####
+#### OpenGL Section
+####
+##############################################################
+
+## OpenGL
+FIND_PACKAGE(OpenGL REQUIRED)
+INCLUDE_DIRECTORIES(${OPENGL_INCLUDE_DIR})
+
+## OpenGL
+FIND_PACKAGE(GLUT REQUIRED)
+INCLUDE_DIRECTORIES(${GLUT_INCLUDE_DIR})
+
+ADD_EXECUTABLE(HelloGL hello_gl.cc)
+
+TARGET_LINK_LIBRARIES(HelloGL ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})
+
+#  executable properties
+SET_TARGET_PROPERTIES(HelloGL PROPERTIES OUTPUT_NAME "HelloGL")
+
+#################################################################
+####
+#### Protobuf
+####
+#################################################################
+
+
+INCLUDE(FindProtobuf)
+FIND_PACKAGE(Protobuf REQUIRED)
+
+ADD_EXECUTABLE(HelloPb hello_protobuf.cc)
+
+#ADD_DEPENDENCIES(HelloEventS event)
+#ADD_DEPENDENCIES(HelloPb event_mq)
+
+#TARGET_LINK_LIBRARIES(HelloPb event)
+#TARGET_LINK_LIBRARIES(HelloPb event_mq)
+
+#  executable properties
+SET_TARGET_PROPERTIES(HelloPb PROPERTIES OUTPUT_NAME "HelloPb")
 
 
 
