@@ -165,8 +165,8 @@ SET_TARGET_PROPERTIES(HelloMongo PROPERTIES OUTPUT_NAME "HelloMongo")
 #################################################################
 
 ## NOT COMPLETED
-# INCLUDE(FindProtobuf)
-# FIND_PACKAGE(Protobuf REQUIRED)
+INCLUDE(FindProtobuf)
+FIND_PACKAGE(Protobuf REQUIRED)
 
 ADD_EXECUTABLE(HelloPb hello_protobuf.cc)
 
