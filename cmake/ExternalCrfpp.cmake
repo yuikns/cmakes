@@ -6,7 +6,7 @@ ProcessorCount(PROCESSOR_COUNT_VAL)
 
 EXTERNALPROJECT_ADD(
 	crfpp_proj
-	GIT_REPOSITORY git@github.com:yujing5b5d/crfpp.git
+	GIT_REPOSITORY git@github.com:yuikns/crfpp.git
 	PREFIX ${CMAKE_CURRENT_BINARY_DIR}
 	UPDATE_COMMAND ""
 	CONFIGURE_COMMAND ./configure

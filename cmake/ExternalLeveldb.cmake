@@ -7,7 +7,7 @@ ProcessorCount(PROCESSOR_COUNT_VAL)
 
 EXTERNALPROJECT_ADD(
 	leveldb_proj
-	GIT_REPOSITORY git@github.com:yujing5b5d/leveldb.git
+	GIT_REPOSITORY git@github.com:yuikns/leveldb.git
 	PREFIX ${CMAKE_CURRENT_BINARY_DIR}
 	UPDATE_COMMAND ""
 	CONFIGURE_COMMAND ""
