@@ -74,8 +74,60 @@ std::vector<std::string> split(const std::string &s, const std::string &delim) {
     return elems;
 }
 
+inline int chk_utf8(unsigned char ch)
+{
+    unsigned char t = 0x80;
+    if(!(ch & t)) // ! 1000 0000 B
+    {
+        return 1;
+    }
+    t = t >> 1;
+    if(!(ch & t)) // ! 0100 0000 B
+    {
+        return 0;
+    }
+    t = t >> 1;
+    int l = 2;
+    while(ch & t)
+    {
+        t = t >> 1;
+        l ++ ;
+        if(l>6) return -1;
+    }
+    return l;
+}
 
-
+//https://github.com/argcv/utf8reader/blob/master/main.c
+//TODO
+/*
+bool parse_utf8(const std::string &s,std::vector<std::string> *_elems) {
+    size_t len = s.length();
+    for(size_t i = 0; i < len; i++) {
+        int term_len =  chk_utf8((unsigned char)s[i]);
+        std::string term("");
+                int len = utf8tc((unsigned char)ch);
+                if(len ==0 || len == -1 ) continue;
+                int off = 1;
+                term[0] = ch;
+                int err_flg = 0;
+                for(;off<len;off ++ )
+                {
+                    ch = fgetc(f);
+                    if(ch == EOF || utf8tc(ch) != 0 )
+                    {
+                        fprintf(stderr,"ERRORCODE: 0x%X!",ch);
+                        err_flg = 1;
+                        break;
+                    }
+                    term[off] = ch;
+                }
+                if(err_flg ) continue;
+                //fprintf(wt,"[%s]\n",term);
+                fprintf(stdout,"[%s]\n",term);
+    }
+    return false;
+}
+*/
 
 }  // namespace util
 }  // namespace argcv

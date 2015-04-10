@@ -71,6 +71,7 @@ std::vector<std::string> &split(const std::string &s, const std::string &delim,
 
 std::vector<std::string> split(const std::string &s, const std::string &delim);
 
+bool parse_utf8(const std::string &s,std::vector<std::string> *_elems);
 
 }  // namespace util
 }  // namespace argcv

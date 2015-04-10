@@ -14,15 +14,11 @@ namespace ml {
 template <typename X, typename Y>
 class DataSet {
  public:
-    DataSet() {
-    }
+    DataSet() {}
 
-    std::vector< std::pair <std::vector<X>, Y> > data() {
-        return ds;
-    }
+    std::vector< std::pair <std::vector<X>, Y> > data() { return ds; }
 
-    virtual ~DataSet() {
-    }
+    virtual ~DataSet() { }
 
     uint64_t size() {
         return ds.size();
